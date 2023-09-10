@@ -1,0 +1,23 @@
+.metadata-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .metadata-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px; /* Add margin to separate fields */
+  }
+  
+  .text {
+    width: 150px; /* Adjust as needed */
+    text-align: right; /* Right-align the label text */
+    margin-right: 10px; /* Add some space between label and textarea */
+  }
+  
+  .textarea {
+    height: 150px;
+    width: 550px;
+  }
+  
