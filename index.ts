@@ -1,10 +1,19 @@
 import puppeteer, { Browser, Page } from "puppeteer";
 import * as fs from "fs/promises";
 
-const googleImageUrl = `https://www.google.com/search?client=firefox-b-d&sca_esv=564039451&sxsrf=AB5stBijTO8K-5JESmS55PlixhoKCI9yuw:1694291783167&q=vodka&tbm=isch&source=lnms&sa=X&ved=2ahUKEwiHoobfsJ6BAxUj2QIHHeUDBcgQ0pQJegQIDBAB`;
 
-const main = async () => {
-  const browser: Browser = await puppeteer.launch({ headless: false });
+
+
+(async () => {
+
+  const googleImageUrl = `https://www.google.com/search?client=firefox-b-d&sca_esv=564039451&sxsrf=AB5stBijTO8K-5JESmS55PlixhoKCI9yuw:1694291783167&q=vodka&tbm=isch&source=lnms&sa=X&ved=2ahUKEwiHoobfsJ6BAxUj2QIHHeUDBcgQ0pQJegQIDBAB`;
+
+  const browser: Browser = await puppeteer.launch({
+    headless: false,
+    defaultViewport: null,
+    userDataDir: "./tmp",
+  });
+
   const page: Page = await browser.newPage();
   await page.goto(googleImageUrl);
 
@@ -33,6 +42,5 @@ const main = async () => {
   }
 
   await browser.close();
-};
+})();
 
-main();
