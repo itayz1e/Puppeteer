@@ -1,11 +1,20 @@
 import puppeteer, { Browser, Page } from "puppeteer";
 import * as fs from "fs/promises";
 
-const main = async () => {
-  const browser: Browser = await puppeteer.launch({ headless: false });
+(async () => {
+  const googleImageUrl = `https://www.google.com/search?client=firefox-b-d&sca_esv=564039451&sxsrf=AB5stBijTO8K-5JESmS55PlixhoKCI9yuw:1694291783167&q=vodka&tbm=isch&source=lnms&sa=X&ved=2ahUKEwiHoobfsJ6BAxUj2QIHHeUDBcgQ0pQJegQIDBAB`;
+
+  const browser: Browser = await puppeteer.launch({
+    headless: false,
+    defaultViewport: null,
+    userDataDir: "./tmp",
+  });
+
   const page: Page = await browser.newPage();
 
-  const searchQuery = await page.evaluate(() => prompt("Enter a search query:"));
+  const searchQuery = await page.evaluate(() =>
+    prompt("Enter a search query:")
+  );
 
   if (!searchQuery) {
     console.log("Search query not provided. Exiting.");
@@ -20,12 +29,12 @@ const main = async () => {
   await page.goto(googleSearchUrl);
 
   try {
-    await page.waitForSelector('div.GKS7s', { visible: true });
-    const imagesDiv = await page.$('div.GKS7s');
+    await page.waitForSelector("div.GKS7s", { visible: true });
+    const imagesDiv = await page.$("div.GKS7s");
     if (imagesDiv) {
       await Promise.all([
         imagesDiv.click(),
-        page.waitForNavigation({ waitUntil: "domcontentloaded" }), 
+        page.waitForNavigation({ waitUntil: "domcontentloaded" }),
       ]);
     } else {
       console.error("No div with class 'GKS7s' found.");
@@ -67,6 +76,4 @@ const main = async () => {
   } finally {
     await browser.close();
   }
-};
-
-main();
+})();
