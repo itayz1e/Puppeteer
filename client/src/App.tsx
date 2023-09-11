@@ -11,12 +11,17 @@ import { useState } from "react";
 
 function App() {
   const [selectedImage, setSelectedImage] = useState('');
+  const [barcodeSelect, setBarcodeSelect] = useState('');
 
 
 
   const handleImageSelect = (imageSrc: string) => {
     setSelectedImage(imageSrc);
     console.log(setSelectedImage);
+  };
+  const handlebarcodeSelect = (imageSrc: string) => {
+    setBarcodeSelect(imageSrc);
+    console.log(setBarcodeSelect);
   };
 
 
@@ -26,10 +31,19 @@ function handleSubmit(ev: any) {
       const description = ev.target.elements.description.value;
       const isoCode = ev.target.elements.iso.value;
       const fluidSpeed = ev.target.elements.fluidSpeed.value;
+
       if (!description) throw new Error("No description");
       if (!isoCode) throw new Error("No iso Code");
       if (!fluidSpeed) throw new Error("No Fluid Speed");
-      const BottleData: any = { description, isoCode, fluidSpeed };
+      if (!selectedImage || !barcodeSelect)
+        throw new Error("No Image or Barcode selected");
+      const BottleData: any = {
+        selectedImage,
+        barcodeSelect,
+        fluidSpeed,
+        description,
+        isoCode,
+      };
 
         console.log(BottleData);
       } catch (error: any) {
@@ -75,55 +89,58 @@ function handleSubmit(ev: any) {
             <button type="button" className="RecycleIcon">
               <FontAwesomeIcon icon={faRecycle} className="icon" />
             </button>
-            <div>
+            <button>
             {selectedImage && (
           <div>
             <h3>Selected Image:</h3>
-            <img src={selectedImage} alt="Selected" width="200" />
+            <img src={selectedImage} alt="Selected" width="200" height="200" />
           </div>
         )}
-            </div>
+            </button>
           </div>
         </div>
         <div className="component-container">
           <div className="container">
             <div className="container__image">
               <p>500ML</p>
-              <button type="button">
+              <button type="button" onClick={() => handlebarcodeSelect('https://barcode-list.com/barcodeImage.php?barcode=5099873089712')}>
                 <img
                   src="https://barcode-list.com/barcodeImage.php?barcode=5099873089712"
-                  alt="500"
-                  className="image"
+                  alt=""
+                  className={`image ${barcodeSelect === 'https://barcode-list.com/barcodeImage.php?barcode=5099873089712' ? 'selected' : ''}`}
                 />
               </button>
             </div>
             <div className="container__image">
               <p>750ML</p>
-              <button type="button">
+              <button type="button" onClick={() => handlebarcodeSelect('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/UPC-A-036000291452.svg/1200px-UPC-A-036000291452.svg.png')}>
                 <img
-                  src="https://barcode-list.com/barcodeImage.php?barcode=5099873089712"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/UPC-A-036000291452.svg/1200px-UPC-A-036000291452.svg.png"
                   alt="750"
-                  className="image"
+                  className={`image ${barcodeSelect === 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/UPC-A-036000291452.svg/1200px-UPC-A-036000291452.svg.png' ? 'selected' : ''}`}
                 />
               </button>
             </div>
             <div className="container__image">
               <p>1000ML</p>
-              <button type="button">
+              <button type="button" onClick={() => handlebarcodeSelect('https://media.istockphoto.com/id/1166257074/vector/barcode-vector-icon-in-flat-style.jpg?s=612x612&w=0&k=20&c=1galRqeTsqmf1QBV7581hFi5YY7wQOG6oq5GHHdTOTA=')}>
                 <img
-                  src="https://barcode-list.com/barcodeImage.php?barcode=5099873089712"
+                  src="https://media.istockphoto.com/id/1166257074/vector/barcode-vector-icon-in-flat-style.jpg?s=612x612&w=0&k=20&c=1galRqeTsqmf1QBV7581hFi5YY7wQOG6oq5GHHdTOTA="
                   alt="1000"
-                  className="image"
+                  className={`image ${barcodeSelect === 'https://media.istockphoto.com/id/1166257074/vector/barcode-vector-icon-in-flat-style.jpg?s=612x612&w=0&k=20&c=1galRqeTsqmf1QBV7581hFi5YY7wQOG6oq5GHHdTOTA=' ? 'selected' : ''}`}
                 />
               </button>
             </div>
-            <div>
-              <input type="checkbox" className="click" />
-              <label htmlFor="bien" className="confirmed">
-                Please select an image and confirm
-              </label>
-            </div>
+            <button>
+
+            {barcodeSelect && (
+              <div>
+            <h3>Selected Image:</h3>
+            <img src={barcodeSelect} alt="Selected" width="200" height="200" />
           </div>
+        )}
+        </button>
+            </div>
         </div>
         <div className="component-container">
           <div>
@@ -148,7 +165,12 @@ function handleSubmit(ev: any) {
           </div>
         </div>
         <div className="component-container">
-          <input type="submit" value="Submit" className="submit" />
+        <input
+            type="submit"
+            value="Submit"
+            className="submit"
+            disabled={!selectedImage || !barcodeSelect}
+          />
         </div>
       </form>
     </div>
