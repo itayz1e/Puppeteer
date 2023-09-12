@@ -1,5 +1,32 @@
 import puppeteer, { Browser, Page } from "puppeteer";
 import * as fs from "fs/promises";
+// import { S3 } from 'aws-sdk';
+
+// const s3 = new S3();
+
+
+// AWS_ACCESS_KEY_ID=your-access-key-id
+// AWS_SECRET_ACCESS_KEY=your-secret-access-key
+
+// (async () => {
+//   await s3
+//   .putObject({
+//     Body:"hello wolrd",
+//     Bucket:"gelberg-my-uploads",
+//     Key:"my-text.txt",
+//   })
+//   .promise();
+// })();
+
+
+// AWS_ACCESS_KEY_ID=your-access-key-id
+// AWS_SECRET_ACCESS_KEY=your-secret-access-key
+
+// s3.putObject({
+//   Body:"hello world",
+//   Bucket:"gelberg-my-uploads",
+//   Key:"my-file.txt",
+// });
 
 (async () => {
   const browser: Browser = await puppeteer.launch({
@@ -58,6 +85,8 @@ import * as fs from "fs/promises";
     try {
       await fs.writeFile("dataOfImages.json", JSON.stringify(imageData));
       console.log("Data saved to dataOfImages.json");
+
+
     } catch (err) {
       console.error("Error saving data:", err);
     }

@@ -1,3 +1,5 @@
-2023/09/09-23:06:41.174 7f8 Reusing MANIFEST C:\Users\itayz\OneDrive\מסמכים\GitHub\Puppeteer\tmp\Default\Local Storage\leveldb/MANIFEST-000001
-2023/09/09-23:06:41.177 7f8 Recovering log #3
-2023/09/09-23:06:41.180 7f8 Reusing old log C:\Users\itayz\OneDrive\מסמכים\GitHub\Puppeteer\tmp\Default\Local Storage\leveldb/000003.log 
+2023/09/13-00:32:52.015 608c Reusing MANIFEST C:\Users\itai\Documents\GitHub\Puppeteer\Puppeteer\tmp\Default\Local Storage\leveldb/MANIFEST-000001
+2023/09/13-00:32:52.017 608c Recovering log #8
+2023/09/13-00:32:52.018 608c Level-0 table #10: started
+2023/09/13-00:32:52.031 608c Level-0 table #10: 78846 bytes OK
+2023/09/13-00:32:52.037 608c Delete type=0 #8
